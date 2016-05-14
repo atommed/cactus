@@ -2,11 +2,11 @@ function getPopular() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
-      alert(xhttp.readyState);
-      alert(xhttp.responseText);
+      var response = JSON.parse(xhttp.responseText);
+      setEventInfo(response[0]);
     }
   };
-  xhttp.open("GET", "http://10.55.33.91:8080/backend/api/k", true);
+  xhttp.open("GET", "http://10.55.33.91:8080/backend/api/db", true);
   xhttp.send();
 }
 

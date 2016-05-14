@@ -1,6 +1,12 @@
-html, body { height: 100%; margin: 0; padding: 0; }
+html, body {
+  height: 100%;
+   margin: 0;
+   padding: 0;
+   font:13px Arial,Helvetica,sans-serif;
+ }
 #map {
   height: 100%;
+  width:100%;
   z-index:0;
 }
 #header{
@@ -89,4 +95,65 @@ html, body { height: 100%; margin: 0; padding: 0; }
 
 form{
   margin-bottom: 0;
+}
+
+#event_block{
+  position:absolute;
+  right:50px;
+  border:2px solid red;
+  top:100px;
+  width:300px;
+  height: 500px;
+  font:13px Arial,Helvetica,sans-serif;
+  background-color: #fff;
+
+}
+
+#event_name{
+  /*font-size: 18px;
+  line-height: 24px;
+  padding: 12px 0 8px;
+  color: #333;
+  padding-left:5px;
+  padding-right:5px;*/
+}
+
+#event_address{
+  padding-bottom: 5px;
+  font-size:15px;
+  color: #999;
+
+}
+
+#event_date{
+
+  color: #333;
+  padding-bottom: 5px;
+
+}
+
+#event_price{
+  color: #333;
+  padding-bottom: 5px;
+}
+
+#event_description{
+  color: #333;
+  padding-bottom: 5px;
+}
+
+#event_block_wrapper{
+  width:600px;
+  position: absolute;
+  right:-200px;
+  top:100px;
+}
+
+#event_image_block{
+  height:300px;
+  overflow: hidden;
+}
+
+#event_image{
+  margin-top: -50px;
 }
