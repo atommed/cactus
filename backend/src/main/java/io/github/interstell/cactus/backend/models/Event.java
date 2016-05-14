@@ -2,35 +2,58 @@ package io.github.interstell.cactus.backend.models;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.sql.RowId;
 
 /**
  * Created by Grigoriy on 5/14/2016.
  */
 
 public class Event{
-    public  Event(){
-    }
-    public Event(String a, int b) {
-        this.a = a;
-        this.b = b;
+    int id;
+    String name;
+    //Location
+    String description;
+    boolean free;
+    double price;
+    //Date
+
+    public int getId() {
+        return id;
     }
 
-    public String getA() {
-        return a;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setA(String a) {
-        this.a = a;
+    public double getPrice() {
+        return price;
     }
 
-    public int getB() {
-        return b;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public void setB(int b) {
-        this.b = b;
+    public boolean isFree() {
+        return free;
     }
 
-    String a;
-    int b;
+    public void setFree(boolean free) {
+        this.free = free;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
