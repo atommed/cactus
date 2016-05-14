@@ -1,14 +1,18 @@
 package io.github.interstell.cactus.backend.api;
 
 import io.github.interstell.cactus.backend.models.Event;
+import io.github.interstell.cactus.backend.util.LocationFinder;
+import org.postgresql.geometric.PGpoint;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.sql.ResultSet;
 import java.util.List;
 
@@ -19,11 +23,20 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class TestController {
-    @Autowired
-    JdbcTemplate jdbc;
 
     @Autowired
+    JdbcTemplate jdbc;
+    @Autowired
+    LocationFinder locationFinder;
+    @Autowired
     String resp;
+
+
+    @RequestMapping(value = "/map/{addr}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public String getCoords(@PathVariable("addr") String addr){
+        return locationFinder.findLocation(addr);
+    }
 
     @RequestMapping("/lol")
     @ResponseBody
@@ -42,6 +55,9 @@ public class TestController {
             ev.setDescription(rs.getString("description"));
             ev.setFree(rs.getBoolean("free"));
             ev.setPrice(rs.getDouble("price"));
+            ev.setDate(rs.getDate("date"));
+            ev.setLat(rs.getDouble("lat"));
+            ev.setLon(rs.getDouble("lon"));
             return ev;
         }));
         return res;

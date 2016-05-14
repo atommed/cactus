@@ -2,6 +2,7 @@ package io.github.interstell.cactus.backend.models;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.sql.Date;
 import java.sql.RowId;
 
 /**
@@ -11,11 +12,37 @@ import java.sql.RowId;
 public class Event{
     int id;
     String name;
-    //Location
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
+    }
+
+    double lat;
+    double lon;
     String description;
     boolean free;
     double price;
-    //Date
+    Date date;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public int getId() {
         return id;

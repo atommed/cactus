@@ -11,6 +11,8 @@
     <bean class="java.lang.String">
         <constructor-arg value="L"/>
     </bean>
+
+    <bean class="io.github.interstell.cactus.backend.util.LocationFinder"/>
     
     <context:component-scan base-package="io.github.interstell.cactus.backend.config"/>
 </beans>
