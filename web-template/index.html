@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>EventMap</title>
+<link rel="stylesheet" type="text/css" href="index_style.css">
+<script src="menu.js"></script>
+
+</head>
+
+<body>
+
+<div id="header">
+  <div id="logo">
+    Logo here
+  </div>
+
+  <div class="menu_button" id="button_popular" onclick="getPopular()">
+    Popular
+  </div>
+  <div class="menu_button" id="button_filters">
+    Filters
+  </div>
+  <div class="menu_button" id="button_add">
+    Propose event
+  </div>
+</div>
+<div id="filters_block">
+  <div class="filter_button" id="filter1" onclick="filter_click(filter1)">
+    Filter1
+  </div>
+  <div class="filter_button" id="filter2" onclick="filter_click(filter2)">
+    Filter2
+  </div>
+</div>
+<!-- <div id="map"></div>
+    <script type="text/javascript">
+
+var map;
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: -34.397, lng: 150.644},
+    zoom: 8
+  });
+}
+
+    </script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACmesrYQjwH0-W5FaULoK6-o8A2NC5GyM&callback=initMap">
+    </script>-->
+
+</body>
+</html>
