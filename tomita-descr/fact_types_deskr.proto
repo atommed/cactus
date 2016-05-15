@@ -1,0 +1,7 @@
+﻿import "base.proto";
+import "facttypes_base.proto";
+
+message Description: NFactType.TFact
+{
+	required string Descr = 1;
+}
