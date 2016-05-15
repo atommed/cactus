@@ -36,6 +36,16 @@ public class Event{
     double price;
     Date date;
 
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    int likes;
+
     public Date getDate() {
         return date;
     }

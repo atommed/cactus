@@ -1,7 +1,9 @@
 package io.github.interstell.cactus.backend.api;
 
 import io.github.interstell.cactus.backend.models.Event;
+import io.github.interstell.cactus.backend.models.EventRowMapper;
 import io.github.interstell.cactus.backend.util.GoogleGeocode.LocationFinder;
+import io.github.interstell.cactus.backend.util.GooglePlaces.PlacesFinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,7 +22,7 @@ public class TestController {
     @Autowired
     JdbcTemplate jdbc;
     @Autowired
-    LocationFinder locationFinder;
+    PlacesFinder placesFinder;
     @Autowired
     String resp;
 
@@ -28,7 +30,7 @@ public class TestController {
     @RequestMapping(value = "/map/{addr}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public String getCoords(@PathVariable("addr") String addr){
-        return locationFinder.findLocation(addr);
+        return placesFinder.findPlaceInfo(addr);
     }
 
     @RequestMapping("/lol")
@@ -41,18 +43,17 @@ public class TestController {
     @ResponseBody
     public List<Event> db(){
         List<Event> res = this.jdbc.query("select * from event" +
-                " where CAST(date as DATE) < '2016-05-25' and CAST(date as DATE) > current_date",((rs, rowNum) -> {
-            Event ev = new Event();
-            ev.setId(rs.getInt("id"));
-            ev.setName(rs.getString("name"));
-            ev.setDescription(rs.getString("description"));
-            ev.setFree(rs.getBoolean("free"));
-            ev.setPrice(rs.getDouble("price"));
-            ev.setDate(rs.getDate("date"));
-            ev.setLat(rs.getDouble("lat"));
-            ev.setLon(rs.getDouble("lon"));
-            return ev;
-        }));
+                " where CAST(date as DATE) < '2016-05-25' and CAST(date as DATE) > current_date",
+                new EventRowMapper());
+        return res;
+    }
+
+    @RequestMapping("/raiting")
+    @ResponseBody
+    public List<Event> likes(){
+        List<Event> res = this.jdbc.query("select * from event" +
+                " order by -likes limit 10", new EventRowMapper());
+
         return res;
     }
 

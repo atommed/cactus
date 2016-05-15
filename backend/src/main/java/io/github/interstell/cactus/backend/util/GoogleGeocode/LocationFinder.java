@@ -27,7 +27,7 @@ public class LocationFinder {
         context = new GeoApiContext().setApiKey(key);
         filters = new ComponentFilter[]{
                 ComponentFilter.country("UA"),
-                ComponentFilter.administrativeArea("город Киев")
+//                ComponentFilter.administrativeArea("город Киев")
         };
     }
     public String findLocation(String address){

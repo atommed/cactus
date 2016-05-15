@@ -13,6 +13,9 @@
     </bean>
 
     <bean class="io.github.interstell.cactus.backend.util.GoogleGeocode.LocationFinder"/>
-    
+    <bean class="io.github.interstell.cactus.backend.util.GooglePlaces.PlacesFinder"/>
+    <bean class="com.google.maps.GeoApiContext">
+        <property name="apiKey" value="AIzaSyAcnwLwEHqA0GaIuueVytfKXZHcYCTI-xY"/>
+    </bean>
     <context:component-scan base-package="io.github.interstell.cactus.backend.config"/>
 </beans>
