@@ -3,9 +3,8 @@
 TTextMinerConfig {
     Dictionary = "dic.gzt";
 
-    Input = {File = "input.txt"}
 
-    Output = {File = "output.xml"
+    Output = {
             Format = xml}
 
     Articles = [
