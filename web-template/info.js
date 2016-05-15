@@ -19,7 +19,6 @@ function setEventInfo(obj){
   image.src=obj.uri;
 }
 
-
 function fillTop(){
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -49,20 +48,20 @@ function getTopElement(id){
         var button = document.getElementById('top_element#'+response[i].id);
         button.setAttribute("class","collection-item");
       }
-      for (var i = 0; i < response.length; i++){
+      for (var i = 0; i < response.length; i++){var coord = {lat:response[i].lat, lng:response[i].lon};
         if (response[i].id == id){
           var button = document.getElementById('top_element#'+response[i].id);
           if (button.getAttribute("class").localeCompare("collection-item") == 0){
             button.setAttribute("class","collection-item active");
             setEventInfo(response[i]);
             document.getElementById('event_block_wrapper').style.display="block";
-            /*var coord = {lat:response[i].lat, lng:response[i].lon};
+            var coord = {lat:response[i].lat, lng:response[i].lon};
             for (var j = 0; j<markerArray.length; j++){
-              if (markerArray[j].position.lat == coord.lat && markerArray[j].position.lng == coord.lng){
-                markerArray[j].trigger('click');
+              if (markerArray[j].position.lat() == coord.lat && markerArray[j].position.lng() == coord.lng){
+                markerArray[j].click();
                 break;
               }
-            }*/
+            }
           }
           else{
             button.setAttribute("class","collection-item");
@@ -75,4 +74,30 @@ function getTopElement(id){
   };
   xhttp.open("GET", "http://"+serverIP+":8080/backend/api/raiting", true);
   xhttp.send();
+}
+
+function submitAddData(){
+  var name = document.getElementById('name').value;
+  var place = document.getElementById('place').value;
+  var time = document.getElementById('time').value;
+  var imgLink = document.getElementById('imgLink').value;
+  var description = document.getElementById('description').value;
+
+  var request = JSON.stringify({
+    "name":name,
+    "place":place,
+    "time":time,
+    "imgLink":imgLink,
+    "description":description
+  });
+
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", 'http://'+serverIP+':8080/backend/api/addEvent', true)
+  //xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      alert(xhr.responseText);
+    }
+  }
+  xhr.send();
 }

@@ -178,3 +178,19 @@ form{
 .nav-wrapper{
   background-color: rgb(42,128,185);
 }
+
+.row .col.s6{
+  width:100% !important;
+}
+
+#add_submit_btn{
+  left:32%;
+}
+
+#add_block{
+  width:1000px;
+  position:absolute;
+  left:200px;
+  top:60px;
+  display: none;
+}
