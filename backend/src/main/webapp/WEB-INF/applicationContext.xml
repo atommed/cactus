@@ -12,7 +12,7 @@
         <constructor-arg value="L"/>
     </bean>
 
-    <bean class="io.github.interstell.cactus.backend.util.LocationFinder"/>
+    <bean class="io.github.interstell.cactus.backend.util.GoogleGeocode.LocationFinder"/>
     
     <context:component-scan base-package="io.github.interstell.cactus.backend.config"/>
 </beans>

@@ -1,19 +1,12 @@
 package io.github.interstell.cactus.backend.api;
 
 import io.github.interstell.cactus.backend.models.Event;
-import io.github.interstell.cactus.backend.util.LocationFinder;
-import org.postgresql.geometric.PGpoint;
+import io.github.interstell.cactus.backend.util.GoogleGeocode.LocationFinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
-import java.sql.ResultSet;
 import java.util.List;
 
 /**
@@ -48,7 +41,7 @@ public class TestController {
     @ResponseBody
     public List<Event> db(){
         List<Event> res = this.jdbc.query("select * from event" +
-                " where CAST(date as DATE) < '2016-05-25' and CAST(date as DATE) > current_date",((ResultSet rs, int rowNum) -> {
+                " where CAST(date as DATE) < '2016-05-25' and CAST(date as DATE) > current_date",((rs, rowNum) -> {
             Event ev = new Event();
             ev.setId(rs.getInt("id"));
             ev.setName(rs.getString("name"));

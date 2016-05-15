@@ -16,7 +16,7 @@ public class DatabaseConfig {
     public DataSource dataSource(){
         BasicDataSource ds = new BasicDataSource();
         ds.setDriverClassName("");
-        ds.setUrl("jdbc:postgresql://10.55.33.64:8888/eventDB");
+        ds.setUrl("jdbc:postgresql://10.55.28.10:8888/eventDB");
         ds.setUsername("postgres");
         ds.setPassword("1234");
         ds.setInitialSize(5);
