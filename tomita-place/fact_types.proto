@@ -1,0 +1,7 @@
+﻿import "base.proto";
+import "facttypes_base.proto";
+
+message Address: NFactType.TFact
+{
+	required string StreetName = 1;
+}
