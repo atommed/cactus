@@ -158,3 +158,23 @@ form{
 #event_image{
   margin-top: -50px;
 }
+
+#top_block{
+  width:300px;
+  position:absolute;
+  left:10px;
+  top:60px;
+  display:none;
+}
+
+#nav-mobile{
+  margin-left:120px;
+}
+
+.brand-logo{
+  margin-left:10px;
+}
+
+.nav-wrapper{
+  background-color: rgb(42,128,185);
+}

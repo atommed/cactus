@@ -19,8 +19,8 @@
 
 <script type="text/javascript">// <![CDATA[
 $(document).ready(function(){
-    $("#button_filters").click(function(){
-        $("#filters_block").slideToggle(200);
+    $("#popular_button").click(function(){
+        $("#top_block").slideToggle(200);
         return false;
     });
 });
@@ -32,14 +32,20 @@ $(document).ready(function(){
 
 <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Logo</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="javascript:getPopular()">Popular</a></li>
+      <a href="#" class="brand-logo">Eventie</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li id="popular_button"><a href="">Popular</a></li>
         <li><a href="badges.html">Filters</a></li>
         <li><a href="collapsible.html">JavaScript</a></li>
       </ul>
     </div>
 </nav>
+
+
+
+<script type="text/javascript">
+  fillTop();
+</script>
 
 <!--<div id="header">
   <div id="logo">
@@ -100,6 +106,13 @@ $(document).ready(function(){
           </div>
         </div>
       </div>
+</div>
+
+<div id="top_block">
+  <div class="collection" id="top_list">
+          <!--<a href="javascript:getTopElement(this)" class="collection-item">Alvin</a>
+          <a href="#!" class="collection-item active">Alvin</a>-->
+  </div>
 </div>
 
 

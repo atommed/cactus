@@ -30,6 +30,7 @@ function initMap() {
 
   //placeMarker("Hello!",50.455500, 30.356876);
   placeInitialMarkers();
+
 }
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
