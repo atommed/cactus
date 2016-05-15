@@ -86,6 +86,16 @@ public class TestController {
         return res;
     }
 
+    private String getName(String text){
+        int i=0;
+        String res="";
+        while(text.charAt(i) !='|' && i < text.length())
+            i++;
+        i++;
+        while(text.charAt(i) != ']' && i < text.length()) { res+=text.charAt(i);i++;}
+        return res;
+    }
+
     @RequestMapping("/fillDB")
     @ResponseBody
     public String fillDB(){
@@ -95,13 +105,18 @@ public class TestController {
             JSONArray resp = (JSONArray) root.get("response");
 
             for(int i = 1; i < resp.size(); i++){
+                Event event = new Event();
+
                 JSONObject res = (JSONObject) resp.get(i);
                 JSONObject attachments = (JSONObject) res.get("attachment");
                 JSONObject photo = (JSONObject) attachments.get("photo");
                 String text = res.get("text").toString();
+                text = text.replaceAll("<br>"," ");
+                System.out.println(getName(text));
                 String img_uri = photo.get("src_big").toString();
+                System.out.println(img_uri);
 
-                return tomita.parse(text);
+                tomita.parse(text,event);
 
                 //jdbc.update("insert into event (name, description,free, img, likes) " +
                 //        "values ('test', 'nonparsed untill tomita aga', FALSE, ?, -5)",img_uri);

@@ -16,7 +16,7 @@ public class EventRowMapper implements RowMapper<Event> {
         ev.setName(rs.getString("name"));
         ev.setDescription(rs.getString("description"));
         ev.setFree(rs.getBoolean("free"));
-        ev.setPrice(rs.getDouble("price"));
+        ev.setPrice(rs.getString("price"));
         ev.setDate(rs.getDate("date"));
         ev.setLat(rs.getDouble("lat"));
         ev.setLon(rs.getDouble("lon"));

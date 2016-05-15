@@ -13,6 +13,16 @@ public class Event{
     int id;
     String name;
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    String address;
+
     public String getUri() {
         return uri;
     }
@@ -43,7 +53,16 @@ public class Event{
     double lon;
     String description;
     boolean free;
-    double price;
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    String  price;
     Date date;
 
     public int getLikes() {
@@ -70,14 +89,6 @@ public class Event{
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public boolean isFree() {
