@@ -42,7 +42,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 function placeMarker(object, lattitude, longtitude, id){
   var myLatLng = {lat: lattitude, lng: longtitude};
-  map.setCenter(myLatLng)
+  map.setCenter(myLatLng);
 
   var marker = new google.maps.Marker({
     position: myLatLng,
@@ -82,6 +82,6 @@ function placeInitialMarkers(){
       }
     }
   };
-  xhttp.open("GET", "http://"+serverIP+":8080/backend/api/db", true);
+  xhttp.open("GET", "http://"+serverIP+":9090/backend/api/db", true);
   xhttp.send();
 }

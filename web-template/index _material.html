@@ -43,51 +43,15 @@ $(document).ready(function(){
       <a href="#" class="brand-logo">Eventie</a>
       <ul id="nav-mobile" class="left hide-on-med-and-down">
         <li id="popular_button"><a href="">Популярные</a></li>
-        <li><a href="badges.html">Фильтры</a></li>
+        <li><a href="">Фильтры</a></li>
         <li id="add_button"><a href="">Добавить событие</a></li>
       </ul>
     </div>
 </nav>
 
-
-
 <script type="text/javascript">
   fillTop();
 </script>
-
-<!--<div id="header">
-  <div id="logo">
-    Logo here
-  </div>
-
-  <div class="menu_button" id="button_popular" onclick="getPopular()">
-    Popular
-  </div>
-  <div class="menu_button" id="button_filters">
-    Filters
-  </div>
-  <div class="menu_button" id="button_add">
-    Propose event
-  </div>
-</div>-->
-
-<div id="filters_block" style="display:none">
-  <div class="filter_button" id="filter1" onclick="filter_click(&quot;filter1&quot;)" onmouseover="filter_hover(&quot;filter1&quot;)" onmouseout="filter_out(&quot;filter1&quot;)">
-    Filter1
-  </div>
-  <div id="filter1_status" style="display:none">false</div>
-  <div class="filter_button" id="filter2" onclick="filter_click(&quot;filter2&quot;)" onmouseover="filter_hover(&quot;filter2&quot;)" onmouseout="filter_out(&quot;filter2&quot;)">
-    Filter2
-  </div>
-  <div id="filter2_status" style="display:none">false</div>
-  <div class="filter_button" id="filter3" onclick="filter_click(&quot;filter3&quot;)" onmouseover="filter_hover(&quot;filter3&quot;)" onmouseout="filter_out(&quot;filter3&quot;)">
-    Filter3
-  </div>
-  <div id="filter3_status" style="display:none">false</div>
-  <div id="filter_submit_btn" onclick="filter_submit()">
-    Submit
-  </div>
-</div>
 
 <div id="map"></div>
 <script async defer
@@ -100,7 +64,7 @@ $(document).ready(function(){
           <div class="card">
             <div class="card-image" id="event_image_block">
               <img id="event_image" src="test.jpg">
-              <div id="event_name_wrapper"><span class="card-title" id="event_name">Radio Day</span></div>
+              <span class="card-title" id="event_name">Radio Day</span>
             </div>
             <div class="card-content">
               <p id="event_address">Площа знань</p>
@@ -118,8 +82,7 @@ $(document).ready(function(){
 
 <div id="top_block">
   <div class="collection" id="top_list">
-          <!--<a href="javascript:getTopElement(this)" class="collection-item">Alvin</a>
-          <a href="#!" class="collection-item active">Alvin</a>-->
+
   </div>
 </div>
 <div id="add_block">

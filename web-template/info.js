@@ -29,17 +29,43 @@ function fillTop(){
     if (xhttp.readyState == 4 && xhttp.status == 200) {
       var response = JSON.parse(xhttp.responseText);
       var list = document.getElementById('top_list');
-      for (var i = 0; i < response.length; i++){
+      for (var i = 0; i<response.length; i++){
+        if (response[i].vip == true){
+          var child = document.createElement('a');
+          child.className="collection-item";
+          child.id="top_element#"+response[i].id;
+          child.href="javascript:getTopElement("+response[i].id+")";
+          child.innerHTML=response[i].name+" (<i>"+moment(response[i].date).format('DD.MM.YYYY')+"</i>)";
+          child.setAttribute("style", "background-color:rgb(255,85,33); color:white");
+          list.appendChild(child);
+        }
+      }
+      for (var i = 0; i<response.length; i++){
+        if (response[i].vip == false){
+          var child = document.createElement('a');
+          child.className="collection-item";
+          child.id="top_element#"+response[i].id;
+          child.href="javascript:getTopElement("+response[i].id+")";
+          child.innerHTML=response[i].name+" (<i>"+moment(response[i].date).format('DD.MM.YYYY')+"</i>)";
+          list.appendChild(child);
+        }
+      }
+      /*for (var i = 0; i < response.length; i++){
         var child = document.createElement('a');
         child.className="collection-item";
         child.id="top_element#"+response[i].id;
         child.href="javascript:getTopElement("+response[i].id+")";
         child.innerHTML=response[i].name+" (<i>"+moment(response[i].date).format('DD.MM.YYYY')+"</i>)";
-        list.appendChild(child);
-      }
+        if (response[i].vip == true){
+          child.style.background-color="rgb(1,187,212)";
+          list.innerHTML = child + list.innerHTML;
+        }
+        else list.appendChild(child);
+
+      }*/
     }
   };
-  xhttp.open("GET", "http://"+serverIP+":8080/backend/api/raiting", true);
+  xhttp.open("GET", "http://"+serverIP+":9090/backend/api/raiting", true);
   xhttp.send();
 }
 
@@ -59,13 +85,13 @@ function getTopElement(id){
             button.setAttribute("class","collection-item active");
             setEventInfo(response[i]);
             document.getElementById('event_block_wrapper').style.display="block";
-            var coord = {lat:response[i].lat, lng:response[i].lon};
+            /*var coord = {lat:response[i].lat, lng:response[i].lon};
             for (var j = 0; j<markerArray.length; j++){
               if (markerArray[j].position.lat() == coord.lat && markerArray[j].position.lng() == coord.lng){
                 markerArray[j].click();
                 break;
               }
-            }
+            }*/
           }
           else{
             button.setAttribute("class","collection-item");
@@ -76,7 +102,7 @@ function getTopElement(id){
       }
     }
   };
-  xhttp.open("GET", "http://"+serverIP+":8080/backend/api/raiting", true);
+  xhttp.open("GET", "http://"+serverIP+":9090/backend/api/raiting", true);
   xhttp.send();
 }
 
@@ -96,12 +122,14 @@ function submitAddData(){
   });
 
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", 'http://'+serverIP+':8080/backend/api/addEvent', true)
+  xhr.open("POST", 'http://'+serverIP+':9090/backend/api/addEvent', true);
+  xhr.setRequestHeader('X-PINGOTHER', 'pingpong');
+  xhr.setRequestHeader('Content-Type', 'application/json');
   //xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
   xhr.onreadystatechange = function() {
     if (xhr.readyState == 4 && xhr.status == 200) {
       alert(xhr.responseText);
     }
   }
-  xhr.send();
+  xhr.send(request);
 }

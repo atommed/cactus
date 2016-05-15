@@ -6,7 +6,7 @@ function getPopular() {
       setEventInfo(response[0]);
     }
   };
-  xhttp.open("GET", "http://"+serverIP+":8080/backend/api/db", true);
+  xhttp.open("GET", "http://"+serverIP+":9090/backend/api/db", true);
   xhttp.send();
 }
 
