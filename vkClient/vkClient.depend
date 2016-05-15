@@ -1,0 +1,44 @@
+# depslib dependency file v1.0
+1463273965 source:c:\progs\cactus\vkclient\client.c
+	<winsock2.h>
+	<windows.h>
+	"client.h"
+	<stdio.h>
+	<stdio.h>
+
+1463270303 c:\progs\cactus\vkclient\client.h
+	<winsock2.h>
+	<windows.h>
+
+1463275468 source:c:\progs\cactus\vkclient\main.c
+	<stdio.h>
+	<stdlib.h>
+	<winsock2.h>
+	<windows.h>
+	<string.h>
+	"client.h"
+	"parce.h"
+
+1463274698 source:c:\progs\cactus\vkclient\cjson.c
+	<string.h>
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<float.h>
+	<limits.h>
+	<ctype.h>
+	"cJSON.h"
+
+1463274644 c:\progs\cactus\vkclient\cjson.h
+
+1463275448 c:\progs\cactus\vkclient\parce.h
+	<stdio.h>
+	<stdlib.h>
+
+1463275370 source:c:\progs\cactus\vkclient\parce.c
+	<stdio.h>
+	<stdlib.h>
+	"cJSON.h"
+	<stdio.h>
+	"parce.h"
+
