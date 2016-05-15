@@ -1,4 +1,5 @@
 var map;
+var serverIP="10.55.28.12";
 var markerArray = [];
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -37,24 +38,34 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                         'Error: Your browser doesn\'t support geolocation.');
 }
 
-function placeMarker(desc, lattitude, longtitude){
+function placeMarker(object, lattitude, longtitude, id){
   var myLatLng = {lat: lattitude, lng: longtitude};
   map.setCenter(myLatLng)
 
   var marker = new google.maps.Marker({
     position: myLatLng,
-    map: map,
-    title: 'Hello!'
+    map: map
   });
   markerArray.push(marker);
 
-  var contentString = desc;
+  /*var contentString = desc;
   var infowindow = new google.maps.InfoWindow({
     content: contentString
-  });
+  });*/
 
   marker.addListener('click', function() {
-    infowindow.open(map, marker);
+    //infowindow.open(map, marker);
+    if (marker.getAnimation() != null) {
+      marker.setAnimation(null);
+      document.getElementById('event_block_wrapper').style.display="none";
+    } else {
+      for (var i = 0; i<markerArray.length; i++){
+        markerArray[i].setAnimation(null);
+      }
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+      setEventInfo(object);
+      document.getElementById('event_block_wrapper').style.display="block";
+    }
   });
 }
 
@@ -65,11 +76,10 @@ function placeInitialMarkers(){
       var response = JSON.parse(xhttp.responseText);
       for (var i = 0; i < response.length; i++){
         var desc = response[i].name + " ("+moment(response[i].date).format('DD.MM.YYYY HH:mm')+")";
-        alert(desc);
-        placeMarker(desc, response[i].lat, response[i].lon);
+        placeMarker(response[i], response[i].lat, response[i].lon, response[i].id);
       }
     }
   };
-  xhttp.open("GET", "http://10.55.33.91:8080/backend/api/db", true);
+  xhttp.open("GET", "http://"+serverIP+":8080/backend/api/db", true);
   xhttp.send();
 }
