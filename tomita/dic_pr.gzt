@@ -1,0 +1,14 @@
+﻿encoding "utf8";
+
+import "base.proto";
+import "articles_base.proto";
+
+import "fact_types_pr.proto";
+
+//import "surnames.gzt";
+//import "kwtypes.proto"
+
+TAuxDicArticle "цена"
+{
+    key = {"tomita:price.cxx" type=CUSTOM}
+}

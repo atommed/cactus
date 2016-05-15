@@ -1,0 +1,22 @@
+﻿encoding "utf8";
+
+TTextMinerConfig {
+    Dictionary = "dic_pr.gzt";
+
+    Input = {File = "input.txt"}
+
+    Output = {File = "output.xml"
+            Format = xml}
+
+    Articles = [
+    		{Name = "цена"}
+               ]
+    
+    Facts = [
+		{ Name = "Price"}
+	    ]
+	
+
+    PrettyOutput = "pretty.html"
+
+}
