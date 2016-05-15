@@ -1,8 +1,0 @@
-﻿import "base.proto";
-import "facttypes_base.proto";
-
-message Date: NFactType.TFact
-{
-	required string Data = 1;
-	optional string prey = 2;
-}
