@@ -41,8 +41,6 @@ public class TomitaRunner {
         ProcessBuilder tomita_b = new ProcessBuilder("C:\\Users\\Grigoriy\\Documents\\cactus\\tomita\\wrapper.exe")
                 .directory(new File("C:\\Users\\Grigoriy\\Documents\\cactus\\tomita"));
         tomita_b.start();
-        System.out.println(tomita_b.directory().getAbsoluteFile());
-        System.err.println(tomita_b);
 
         Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(output);
         doc.getDocumentElement().normalize();
@@ -54,12 +52,20 @@ public class TomitaRunner {
             Node fact  = facts.item(i);
             System.out.println(fact.getNodeName());
             switch (fact.getNodeName()){
-                case "Date":
+                case "Date":/*
+                    //Node val = fact.getNodeValue();
+                    NodeList s = fact.getChildNodes();
+                    for(int j=0; j < s.getLength(); j++)
+                        if(s.item(i).getNodeName()=="Data")
+                            event.hack1 = s.item(i).getNodeName().g
+                    System.out.println(" XXX"+s);*//*
+                    Node val = fact.getFirstChild();
+                    System.out.println(" XXX"+val.toString());*/
                     break;
 
                 case "Address" :
-                    Node val = fact.getFirstChild();
-                    event.setAddress(val.toString());
+                    Node val2 = fact.getFirstChild();
+                    event.setAddress(val2.toString());
                     break;
                 case "Price" :
                     Node val1 = fact.getFirstChild();

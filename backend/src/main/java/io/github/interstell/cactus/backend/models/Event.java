@@ -10,6 +10,17 @@ import java.sql.RowId;
  */
 
 public class Event{
+    public String hack1;
+
+    public boolean isVip() {
+        return vip;
+    }
+
+    public void setVip(boolean vip) {
+        this.vip = vip;
+    }
+
+    boolean vip;
     int id;
     String name;
 

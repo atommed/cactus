@@ -3,6 +3,7 @@ package io.github.interstell.cactus.backend.api;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.github.interstell.cactus.backend.models.Event;
 import io.github.interstell.cactus.backend.models.EventRowMapper;
+import io.github.interstell.cactus.backend.util.DateHandler;
 import io.github.interstell.cactus.backend.util.GoogleGeocode.LocationFinder;
 import io.github.interstell.cactus.backend.util.GooglePlaces.PlacesFinder;
 import io.github.interstell.cactus.backend.util.TomitaRunner;
@@ -22,6 +23,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -42,6 +44,8 @@ class NewEventFormData{
 public class TestController {
 
     @Autowired
+    PlacesFinder pf;
+    @Autowired
     TomitaRunner tomita;
 
     @Autowired
@@ -52,6 +56,7 @@ public class TestController {
     @RequestMapping(value = "/addEvent", method = {RequestMethod.POST, RequestMethod.OPTIONS, RequestMethod.GET})
     @ResponseBody
     public String getEvent(@RequestParam("json") NewEventFormData form){
+        System.out.println("Dima");
         return "ok";
     }
 
@@ -109,10 +114,37 @@ public class TestController {
 
                 JSONObject res = (JSONObject) resp.get(i);
                 JSONObject attachments = (JSONObject) res.get("attachment");
+                long date = ((Long) res.get("date")).longValue();
+                System.out.println(date);
                 JSONObject photo = (JSONObject) attachments.get("photo");
+                JSONObject likes = (JSONObject) attachments.get("likes");
+                Long liks = new Long(10);//(Long)likes.get("count");
+
                 String text = res.get("text").toString();
-                text = text.replaceAll("<br>"," ");
+
+
+
+                text = text.replaceAll("<br>","\n");
+
+
+
+                int p = text.indexOf("Когда:");
+                if(p == -1){
+               //     System.err.println(text);
+                    continue;
+                }
+                String ps = text.substring(text.indexOf("Когда:")+"Когда".length()+2);
+
+                DateHandler hdl = new DateHandler(ps, date);
+                hdl.Parse();
+                String date1 = hdl.getDate();
+
+                System.err.println("!!!!!!!!"+ps+"!!!!!!!!!!!!!!!!");
+
+             //   System.out.println(ps);
+
                 System.out.println(getName(text));
+                event.setName(getName(text));
                 String img_uri = photo.get("src_big").toString();
                 System.out.println(img_uri);
 
@@ -122,6 +154,18 @@ public class TestController {
                 //        "values ('test', 'nonparsed untill tomita aga', FALSE, ?, -5)",img_uri);
 
                 //System.out.println(img_uri);
+
+                if(date1 == null) date1="18-06-2017";
+                if(date1!=null){
+
+                    //d.
+
+                    jdbc.update("insert into event (name, description, free, lat, lon, " +
+                                    "                            likes, img, \"Moderated\", \"VIP\", date, price) values " +
+                                    "                            (?, ?, TRUE, ?,?, ?,?, false, false, '2015-06-06', ?)",
+                            event.getAddress(), event.getDescription(), event.getLat(),event.getLon(),
+                            likes, event.getUri(), event.getPrice());
+                }
             }
             return Integer.toString(resp.size());
         } catch (IOException e) {

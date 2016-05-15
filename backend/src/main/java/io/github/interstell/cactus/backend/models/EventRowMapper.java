@@ -22,6 +22,7 @@ public class EventRowMapper implements RowMapper<Event> {
         ev.setLon(rs.getDouble("lon"));
         ev.setLikes(rs.getInt("likes"));
         ev.setUri(rs.getString("img"));
+        ev.setVip(rs.getBoolean("vip"));
 
         return ev;
     }
