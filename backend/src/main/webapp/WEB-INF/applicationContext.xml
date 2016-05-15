@@ -8,16 +8,9 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-    <bean id="date_parser" class="io.github.interstell.cactus.backend.util.TomitaRunner">
-        <property name="pathToExecutable" value="C:\Users\Grigoriy\Documents\cactus\tomita-date"/>
+    <bean id="tomita_parser" class="io.github.interstell.cactus.backend.util.TomitaRunner">
+        <property name="pathToExecutable" value="C:\\Users\\Grigoriy\\Documents\\cactus\\tomita\\tomitaparser.exe"/>
     </bean>
-    <bean id="place_parser" class="io.github.interstell.cactus.backend.util.TomitaRunner">
-        <property name="pathToExecutable" value="C:\Users\Grigoriy\Documents\cactus\tomita-place"/>
-    </bean>
-    <bean id="price_parser" class="io.github.interstell.cactus.backend.util.TomitaRunner">
-        <property name="pathToExecutable" value="C:\Users\Grigoriy\Documents\cactus\tomita-price"/>
-    </bean>
-
     <bean class="io.github.interstell.cactus.backend.util.GoogleGeocode.LocationFinder"/>
     <bean class="io.github.interstell.cactus.backend.util.GooglePlaces.PlacesFinder"/>
     <bean class="com.google.maps.GeoApiContext">

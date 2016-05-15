@@ -1,18 +1,24 @@
 package io.github.interstell.cactus.backend.api;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.github.interstell.cactus.backend.models.Event;
 import io.github.interstell.cactus.backend.models.EventRowMapper;
 import io.github.interstell.cactus.backend.util.GoogleGeocode.LocationFinder;
 import io.github.interstell.cactus.backend.util.GooglePlaces.PlacesFinder;
+import io.github.interstell.cactus.backend.util.TomitaRunner;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -22,15 +28,32 @@ import java.util.List;
  * Created by Grigoriy on 5/14/2016.
  */
 
+@JsonIgnoreProperties(ignoreUnknown = true)
+class NewEventFormData{
+    String name;
+    String place;
+    String time;
+    String imgLink;
+    String description;
+}
+
 @RestController
 @RequestMapping("/api")
 public class TestController {
+
+    @Autowired
+    TomitaRunner tomita;
 
     @Autowired
     JdbcTemplate jdbc;
     @Autowired
     PlacesFinder placesFinder;
 
+    @RequestMapping(value = "/addEvent", method = {RequestMethod.POST, RequestMethod.OPTIONS, RequestMethod.GET})
+    @ResponseBody
+    public String getEvent(@RequestParam("json") NewEventFormData form){
+        return "ok";
+    }
 
     @RequestMapping(value = "/map/{addr}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
@@ -78,13 +101,13 @@ public class TestController {
                 String text = res.get("text").toString();
                 String img_uri = photo.get("src_big").toString();
 
-                jdbc.update("insert into event (name, description,free, img, likes) " +
-                        "values ('test', 'nonparsed untill tomita aga', FALSE, ?, -5)",img_uri);
+                return tomita.parse(text);
 
-                System.out.println(img_uri);
+                //jdbc.update("insert into event (name, description,free, img, likes) " +
+                //        "values ('test', 'nonparsed untill tomita aga', FALSE, ?, -5)",img_uri);
+
+                //System.out.println(img_uri);
             }
-
-            System.out.println("Good");
             return Integer.toString(resp.size());
         } catch (IOException e) {
             e.printStackTrace();
@@ -92,6 +115,13 @@ public class TestController {
         } catch (ParseException e) {
             e.printStackTrace();
             return e.getMessage();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
         }
+        return "we";
     }
 }
