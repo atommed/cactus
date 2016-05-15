@@ -30,8 +30,6 @@ public class TestController {
     JdbcTemplate jdbc;
     @Autowired
     PlacesFinder placesFinder;
-    @Autowired
-    String resp;
 
 
     @RequestMapping(value = "/map/{addr}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -50,7 +48,8 @@ public class TestController {
     @ResponseBody
     public List<Event> db(){
         List<Event> res = this.jdbc.query("select * from event" +
-                " where CAST(date as DATE) < '2016-05-25' and CAST(date as DATE) > current_date",
+                " where CAST(date as DATE) < '2016-05-25' and CAST(date as DATE) > current_date " +
+                "order by id",
                 new EventRowMapper());
         return res;
     }
@@ -59,7 +58,7 @@ public class TestController {
     @ResponseBody
     public List<Event> likes(){
         List<Event> res = this.jdbc.query("select * from event" +
-                " order by -likes limit 10", new EventRowMapper());
+                " order by -likes limit 3", new EventRowMapper());
 
         return res;
     }
@@ -79,6 +78,9 @@ public class TestController {
                 String text = res.get("text").toString();
                 String img_uri = photo.get("src_big").toString();
 
+                jdbc.update("insert into event (name, description,free, img, likes) " +
+                        "values ('test', 'nonparsed untill tomita aga', FALSE, ?, -5)",img_uri);
+
                 System.out.println(img_uri);
             }
 
@@ -91,12 +93,5 @@ public class TestController {
             e.printStackTrace();
             return e.getMessage();
         }
-    }
-
-    @RequestMapping("/k")
-    @ResponseBody
-    public String t(){
-        System.out.println("lel");
-        return resp;
     }
 }

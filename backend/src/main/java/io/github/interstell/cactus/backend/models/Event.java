@@ -13,6 +13,16 @@ public class Event{
     int id;
     String name;
 
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
+    String uri;
+
     public double getLat() {
         return lat;
     }
