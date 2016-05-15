@@ -9,11 +9,11 @@ TTextMinerConfig {
             Format = xml}
 
     Articles = [
-    		{Name = "дата"} {Name = "цена"} {Name = "адрес"}{Name = "ивент"}
+    		{Name = "дата"} {Name = "цена"} {Name = "адрес"}
                ]
     
     Facts = [
-			{ Name = "Date"} { Name = "Price"} { Name = "Address"}{ Name = "Description"}
+			{ Name = "Date"} { Name = "Price"} { Name = "Address"}
 	        ]
 	
 
