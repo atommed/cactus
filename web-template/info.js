@@ -8,7 +8,11 @@ function setEventInfo(obj){
 
   name.innerHTML = obj.name;
   address.innerHTML = obj.address;
-  date.innerHTML = moment(obj.date).format('DD.MM.YYYY HH:mm');
+  if (moment(obj.date).format('HH:mm').localeCompare("00:00") == 0){
+    date.innerHTML = moment(obj.date).format('DD.MM.YYYY');
+  }
+  else date.innerHTML = moment(obj.date).format('DD.MM.YYYY HH:mm');
+
   if (obj.price == 0){
     price.innerHTML = "Стоимость: бесплатно";
   }
@@ -30,7 +34,7 @@ function fillTop(){
         child.className="collection-item";
         child.id="top_element#"+response[i].id;
         child.href="javascript:getTopElement("+response[i].id+")";
-        child.innerHTML=response[i].name+" ("+moment(response[i].date).format('DD.MM.YYYY')+")";
+        child.innerHTML=response[i].name+" (<i>"+moment(response[i].date).format('DD.MM.YYYY')+"</i>)";
         list.appendChild(child);
       }
     }

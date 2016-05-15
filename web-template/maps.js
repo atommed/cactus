@@ -29,8 +29,9 @@ function initMap() {
   }*/
 
   //placeMarker("Hello!",50.455500, 30.356876);
+  var curPos = {lat: 50.447573, lng:30.422884};
   placeInitialMarkers();
-
+  map.setCenter(curPos);
 }
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);

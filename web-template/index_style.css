@@ -140,6 +140,9 @@ form{
 #event_description{
   color: #333;
   padding-bottom: 5px;
+  max-height:80px;
+  overflow-y: scroll;
+  word-wrap: break-word;
 }
 
 #event_block_wrapper{
@@ -184,7 +187,7 @@ form{
 }
 
 #add_submit_btn{
-  left:32%;
+  left:25%;
 }
 
 #add_block{
@@ -193,4 +196,15 @@ form{
   left:200px;
   top:60px;
   display: none;
+}
+
+.collection a.collection-item-vip {
+    display: block;
+    transition: .25s;
+    color: rgb(1,187,212);
+}
+
+#event_name_wrapper{
+  width:100%;
+  background-color: rgb(96,124,138);
 }
